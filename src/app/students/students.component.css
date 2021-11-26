@@ -1,0 +1,9 @@
+.div-pdf {
+  margin-left: auto;
+  margin-right: auto;
+  width: 10%;
+}
+pdf-viewer {
+  display: inline-block;width: 25%;
+
+}

@@ -1,0 +1,109 @@
+<div class="panel panel-default">
+  <div class="panel-heading">New Student</div>
+  <div class="panel-body">
+    <form [formGroup]="reactiveForm">
+      <div class="form-group">
+        <label class="control-label">First name :</label>
+        <input class="form-control" type="text" name="firstName" formControlName="firstName">
+        <div *ngIf="reactiveForm.controls.firstName.errors && (reactiveForm.controls.firstName.touched || reactiveForm.controls.firstName.dirty)" style="color: red">
+          <div *ngIf="reactiveForm.hasError('required','firstName')">
+            First Name Required
+          </div>
+          <div *ngIf="reactiveForm.hasError('pattern','firstName')">
+            First Name format Invalid
+          </div>
+          <div *ngIf="reactiveForm.hasError('minlength','firstName')">
+            First Name must be 3 letters ...
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Last name :</label>
+        <input class="form-control" type="text" name="lastName" formControlName="lastName">
+        <div *ngIf="reactiveForm.controls.lastName.errors && (reactiveForm.controls.lastName.touched || reactiveForm.controls.lastName.dirty)" style="color: red">
+          <div *ngIf="reactiveForm.hasError('required','lastName')">
+            lastName Name Required
+          </div>
+          <div *ngIf="reactiveForm.hasError('pattern','lastName')">
+            last Name format Invalid
+          </div>
+          <div *ngIf="reactiveForm.hasError('minlength','lastName')">
+            last Name must be 3 letters ...
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">National Number :</label>
+        <input class="form-control" type="text" name="codeNarional" formControlName="codeNational">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Passport Number :</label>
+        <input class="form-control" type="text" name="codePassport"  formControlName="codePassport">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Mail :</label>
+        <input class="form-control" type="text" name="email" formControlName="email">
+        <div *ngIf="reactiveForm.controls.email.errors && (reactiveForm.controls.email.touched || reactiveForm.controls.email.dirty)" style="color: red">
+          <div *ngIf="reactiveForm.hasError('required','email')">
+            lastName Name Required
+          </div>
+          <div *ngIf="reactiveForm.hasError('pattern','email')">
+            last Name format Invalid
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Country :</label>
+        <input class="form-control" type="text" name="country"  formControlName="country">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Age :</label>
+        <input class="form-control" type="text" name="age"  formControlName="age">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Phone number :</label>
+        <input class="form-control" type="text" name="phoneNumber" formControlName="phoneNumber">
+        <div *ngIf="reactiveForm.controls.phoneNumber.errors && (reactiveForm.controls.phoneNumber.touched || reactiveForm.controls.phoneNumber.dirty)" style="color: red">
+          <div *ngIf="reactiveForm.hasError('required','phoneNumber')">
+            phoneNumber Name Required
+          </div>
+          <div *ngIf="reactiveForm.hasError('pattern','phoneNumber')">
+            Phone number format Invalid
+          </div>
+          <div *ngIf="reactiveForm.hasError('minlength','phoneNumber')">
+            Phone number must be 10 letters ...
+          </div>
+          <div *ngIf="reactiveForm.hasError('maxlength','phoneNumber')">
+            Phone number must be 14 letters ...
+          </div>
+        </div>
+
+
+
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Photo:</label>
+        <input type="file" class="form-control" accept="image/*" (change)="onSelectFile($event)" style="height: 100%">
+        <img [src]="imgUrl" height="200" *ngIf="imgUrl">
+      </div>
+
+      <button class="btn btn-success" type="submit"  (click)="saveFrom(reactiveForm)">submit</button>
+
+
+    </form>
+
+  </div>
+</div>

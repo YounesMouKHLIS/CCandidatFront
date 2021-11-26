@@ -1,0 +1,141 @@
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading"> List of students</div>
+    <div class="panel-body">
+      <button class="btn btn-primary" (click)="onGetStudents()"> Students</button>
+      <button class="btn btn-primary" (click)="onGetCandidature()"> Candidature</button>
+
+    </div>
+    <div class="panel-body">
+      <table *ngIf="students" class="table table-striped">
+        <tr>
+          <th>Id Std</th>
+          <th>photo</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Cne</th>
+          <th>Cni</th>
+          <th>Age</th>
+          <th>Phone Number</th>
+          <th>Action</th>
+        </tr>
+
+        <tr *ngFor="let s of students._embedded.students">
+          <td>{{s.id}}</td>
+          <td><img src="{{s.fileName}}" [width]="70"/></td>
+          <td>{{s.firstName}}</td>
+          <td>{{s.lastName}}</td>
+          <td>{{s.cne}}</td>
+          <td>{{s.cni}}</td>
+          <td>{{s.age}}</td>
+          <td>{{s.phoneNumber}}</td>
+          <td><a class="btn btn-success" (click)="showStudent(s)">Show</a></td>
+        </tr>
+      </table>
+    </div>
+
+
+    <div class="panel-body" *ngIf="mode==1">
+
+      <table *ngIf="candidatures" class="table table-striped">
+        <tr>
+          <th>Id cd</th>
+          <th>Cv</th>
+          <th>Letter</th>
+          <th>Photo</th>
+          <th>Action</th>
+        </tr>
+        <tr *ngFor="let p of candidatures._embedded.candidatures">
+          <td>{{p.id}}</td>
+          <td><a href="{{p.cvName}}">download cv</a>
+            <button (click)="viewPdf(p.cvName)"></button>
+          </td>
+          <td><a href="{{p.letterName}}">download letter</a>
+            <button (click)="viewPdf(p.letterName)"></button>
+          </td>
+          <td><a href="{{p.photoName}}">download cin</a>
+            <button (click)="viewImage(p.photoName)"></button>
+          </td>
+
+
+          <td><a class="btn btn-success" (click)="showStudent(p)">Show</a></td>
+        </tr>
+      </table>
+
+      <div style="display: {{displayPdf}}">
+        <!-- <button (click)="zoomIn()">wewe</button>
+         <pdf-viewer [src]="pdfSrc" [original-size]="false" [zoom]="pdfZoom" [fit-to-page]="true" [render-text]="true" style="display: block; "></pdf-viewer>
+       -->
+        <ngx-extended-pdf-viewer [src]="pdfSrc" [useBrowserLocale]="useBrowserLocale" [textLayer]="true"
+                                 height="50vh"></ngx-extended-pdf-viewer>
+      </div>
+
+      <div style="display: {{displayImage}} ">
+        <img [src]="imageSrc">
+      </div>
+
+    </div>
+
+
+    <div class="panel-body" *ngIf="mode==2">
+      <div class="panel-body">
+        <table *ngIf="currentStudent" class="table table-striped">
+          <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Cne</th>
+            <th>Cni</th>
+            <th>Age</th>
+            <th>file name</th>
+            <th>Phone Number</th>
+            <th>Action</th>
+          </tr>
+
+          <tr>
+            <td>{{currentStudent.id}}</td>
+            <td><img src="{{currentStudent.fileName}}" [width]="70"/></td>
+            <td>{{currentStudent.firstName}}</td>
+            <td>{{currentStudent.lastName}}</td>
+            <td>{{currentStudent.cne}}</td>
+            <td>{{currentStudent.cni}}</td>
+            <td>{{currentStudent.age}}</td>
+            <td>{{currentStudent.phoneNumber}}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="panel-body">
+        <img [src]="imageCin" [width]="100"/>
+      </div>
+
+      <div class="panel-body" *ngIf="cvNamee">
+
+
+      </div>
+
+      <div class="panel-body" *ngIf="letter">
+        <ngx-extended-pdf-viewer [src]="letter" [useBrowserLocale]="useBrowserLocale" [textLayer]="true"
+                                 height="50vh"></ngx-extended-pdf-viewer>
+      </div>
+
+
+        <div class="panel panel-heading">State Candidadature<div>
+
+            <form #f="ngForm" (ngSubmit)="refuserCandidature(f.value)">
+              <div class="panel-body">
+                <label class="control-label">Justification :</label>
+                <input class="form-control" type="text" name="justification" ngModel="">
+                <button class="btn btn-danger" type="submit">Refuser</button>
+                <button class="btn btn-success" (click)="accepterCandidature()">Accepter</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+    </div>
+
+
+  </div>
+</div>
